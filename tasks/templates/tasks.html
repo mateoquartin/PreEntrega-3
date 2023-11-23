@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+    <div>
+        <div >
+            {% if query %}
+                <p>Resultados de búsqueda para: <strong>{{ query }}</strong></p>
+            {% endif %}
+
+            {% if tasks %}
+                {% if tasks.0.dia_completado %}
+                    <h1>Tareas Completadas</h1>
+                {% else %}
+                    <h1>Tareas Pendientes</h1>
+                {% endif %}
+            {% else %}
+                <h1>No hay tareas</h1>
+            {% endif %}
+            
+            <!-- Resto del contenido de la plantilla... -->
+            <ul>
+                {% for task in tasks %}
+                    <a href="{% url 'task_detail' task.id %}">
+                        <header>
+                            {% if task.importante %}
+                                <h1>{{ task.titulo }}</h1>
+                            {% else %}
+                                <h1>{{ task.titulo }}</h1>
+                            {% endif %}
+                            <p>{{ task.user.username }}</p>
+                        </header>
+
+                        <p>{{ task.description }}</p>
+
+                        <p>{{ task.dia_completado|date:'M j Y:i' }}</p>
+                    </a>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 mt-5">
+            <form method="POST">
+                <h1>Registro de Usuario</h1>
+
+                {{ Error }}
+                {% csrf_token %}
+                <div>
+                    <label for="username">Nombre de Usuario:</label>
+                    <input type="text" name="username" id="username" placeholder="Escriba nombre de usuario">
+                </div>
+                <div>
+                    <label for="password1">Contraseña:</label>
+                    <input type="password" name="password1" id="password1" placeholder="Escriba contraseña">
+                </div>
+                <div>
+                    <label for="password2">Repetir contraseña:</label>
+                    <input type="password" name="password2" id="password2" placeholder="Por favor, confirme contraseña">
+                </div>
+                <button>
+                    Registrarse
+                </button>
+            </form>
+            
+            <div>
+                <p>¿Ya tienes una cuenta? <a href="{% url 'signin' %}">Iniciar Sesion</a></p>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
